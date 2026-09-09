@@ -1,26 +1,79 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+  Design tokens extracted from Figma "Hunter Hex Capital LLC-H1-R1" (node 45:2).
+  Values are taken verbatim from the design — do not approximate.
+*/
+@theme {
+  /* Surfaces */
+  --color-hh-green: #0e2a20; /* page / section background */
+  --color-hh-deep: #06150f; /* cards, inputs, badges */
+
+  /* Brand gold */
+  --color-hh-gold: #d9b872; /* accent text, primary button fill */
+  --color-hh-gold-dark: #b8925a; /* borders, button border */
+
+  /* Text */
+  --color-hh-cream: #f3efe7; /* primary text */
+  --color-hh-muted: #a3b3aa; /* secondary / meta text */
+
+  /* State */
+  --color-hh-danger: #d9534f; /* negative price movement */
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* Figma container: 1440 frame - 80px gutters = 1280 content */
+  --spacing-gutter: 80px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Hairline border used across every card in the design */
+    --hh-hairline: rgba(184, 146, 90, 0.2);
+    /* Dimmed body copy */
+    --hh-dim: rgba(243, 239, 231, 0.65);
+    /* Gold glow under primary buttons / feature cards */
+    --hh-glow: 0 4px 8px rgba(184, 146, 90, 0.25);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Header is 88px tall and sticky — offset anchor targets so headings clear it */
+    scroll-padding-top: 88px;
+  }
+
+  body {
+    background-color: var(--color-hh-green);
+    color: var(--color-hh-cream);
+    /* The design has no horizontal scroll at any width */
+    overflow-x: hidden;
+  }
+
+  /* Visible focus ring for keyboard users on the dark ground */
+  :focus-visible {
+    outline: 2px solid var(--color-hh-gold);
+    outline-offset: 2px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@utility hh-hairline {
+  border-color: var(--hh-hairline);
+}
+
+@utility hh-glow {
+  box-shadow: var(--hh-glow);
 }
