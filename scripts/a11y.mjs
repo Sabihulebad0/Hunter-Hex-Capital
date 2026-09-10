@@ -1,7 +1,22 @@
 import { chromium } from "playwright";
+
+const ROUTES = [
+  "/",
+  "/about",
+  "/services",
+  "/products",
+  "/gallery",
+  "/testimonials",
+  "/faq",
+  "/contact",
+];
+
 const b = await chromium.launch();
+let problems = 0;
+
+for (const route of ROUTES) {
 const p = await b.newPage({ viewport: { width: 1440, height: 900 } });
-await p.goto("http://localhost:3000/", { waitUntil: "load" });
+await p.goto(`http://localhost:3000${route}`, { waitUntil: "load" });
 await p.evaluate(async () => {
   for (let y = 0; y < document.body.scrollHeight; y += window.innerHeight) {
     window.scrollTo(0, y); await new Promise(r => setTimeout(r, 80));
@@ -44,6 +59,17 @@ const report = await p.evaluate(() => {
   };
 });
 
+// Exactly one h1, no skipped levels, every control named — anything else is
+// a problem worth flagging.
+const bad =
+  report.h1Count !== 1 ||
+  report.skips.length > 0 ||
+  report.missingAlt > 0 ||
+  report.unlabeled.length > 0 ||
+  report.btnNoName > 0;
+if (bad) problems++;
+
+console.log(`=== ${route} === ${bad ? "** CHECK **" : "ok"}`);
 console.log("lang:", report.lang);
 console.log("h1 count:", report.h1Count, "| headings:", report.total);
 console.log("heading skips:", report.skips.length ? report.skips : "none");
@@ -52,4 +78,9 @@ console.log("unlabeled form controls:", report.unlabeled.length ? report.unlabel
 console.log("buttons/links with no accessible name:", report.btnNoName);
 console.log("\n--- outline ---");
 console.log(report.outline.join("\n"));
+
+await p.close();
+}
+
 await b.close();
+console.log(problems === 0 ? "ALL CLEAN" : `${problems} route(s) to check`);

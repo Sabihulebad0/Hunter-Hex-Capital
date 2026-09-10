@@ -33,8 +33,8 @@ export function Hero() {
             </p>
 
             <div className="flex flex-wrap items-center gap-4">
-              <ButtonLink href="/#contact">Speak With a Specialist</ButtonLink>
-              <ButtonLink href="/#contact" variant="secondary">
+              <ButtonLink href="/contact">Speak With a Specialist</ButtonLink>
+              <ButtonLink href="/contact" variant="secondary">
                 Request Investor Kit
               </ButtonLink>
             </div>

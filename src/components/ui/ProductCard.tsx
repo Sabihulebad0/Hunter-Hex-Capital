@@ -30,7 +30,10 @@ export function ProductCard({ product }: { product: Product }) {
         )}
 
         <Link
-          href={`/#contact?product=${product.id}`}
+          // `#contact` targets the form section, which carries the scroll-mt
+          // that clears the sticky header. Without it this lands on the top of
+          // /contact, with the form well below the fold.
+          href={`/contact?product=${product.id}#contact`}
           className="rounded-[6px] bg-hh-gold px-3 py-2 text-[12px] font-bold text-hh-green transition-colors hover:bg-[#e3c88a]"
         >
           Quote

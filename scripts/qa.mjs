@@ -3,7 +3,16 @@ import { mkdirSync } from "node:fs";
 
 const OUT = process.argv[2] ?? "qa-shots";
 const WIDTHS = [1440, 1280, 1024, 768, 640, 390, 375];
-const ROUTES = ["/", "/products"];
+const ROUTES = [
+  "/",
+  "/about",
+  "/services",
+  "/products",
+  "/gallery",
+  "/testimonials",
+  "/faq",
+  "/contact",
+];
 
 mkdirSync(OUT, { recursive: true });
 

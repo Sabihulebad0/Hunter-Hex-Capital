@@ -35,7 +35,7 @@ export function Services() {
               </div>
 
               <Link
-                href="/#contact"
+                href={`/services#${id}`}
                 className="mt-auto inline-flex items-center gap-2 text-[14px] font-bold text-hh-gold hover:underline"
               >
                 Learn More

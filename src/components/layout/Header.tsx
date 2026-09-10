@@ -10,6 +10,14 @@ import { site } from "@/data/site";
 import { cn } from "@/lib/utils";
 
 /**
+ * "Home" is only current at the root; every other route also owns its children,
+ * so `/products/foo` still lights up Products.
+ */
+function isCurrent(pathname: string, href: string) {
+  return href === "/" ? pathname === "/" : pathname.startsWith(href);
+}
+
+/**
  * Figma node 45:3 — 88px tall, 80px gutters, gold hairline underneath.
  *
  * The design has no mobile frame, so below `lg` the nav collapses into a drawer
@@ -63,23 +71,28 @@ export function Header() {
         </Link>
 
         <nav aria-label="Main" className="hidden items-center gap-6 lg:flex">
-          {navLinks.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              className={cn(
-                "text-[15px] font-medium transition-colors hover:text-hh-gold",
-                link.label === "Home" ? "text-hh-gold" : "text-hh-cream",
-              )}
-            >
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const current = isCurrent(pathname, link.href);
+
+            return (
+              <Link
+                key={link.label}
+                href={link.href}
+                aria-current={current ? "page" : undefined}
+                className={cn(
+                  "text-[15px] font-medium transition-colors hover:text-hh-gold",
+                  current ? "text-hh-gold" : "text-hh-cream",
+                )}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="flex items-center gap-3">
           <Link
-            href="/#contact"
+            href="/contact"
             className="hidden rounded-[8px] border border-hh-gold-dark bg-hh-gold px-[28px] py-[14px] text-[16px] font-bold text-hh-green hh-glow transition-colors hover:bg-[#e3c88a] lg:inline-flex"
           >
             Speak With a Specialist
@@ -105,18 +118,26 @@ export function Header() {
         className="border-t border-[var(--hh-hairline)] bg-hh-deep lg:hidden"
       >
         <nav aria-label="Mobile" className="flex flex-col px-5 py-4 sm:px-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              className="border-b border-[var(--hh-hairline)] py-3 text-[16px] font-medium text-hh-cream last:border-b-0 hover:text-hh-gold"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const current = isCurrent(pathname, link.href);
+
+            return (
+              <Link
+                key={link.label}
+                href={link.href}
+                aria-current={current ? "page" : undefined}
+                className={cn(
+                  "border-b border-[var(--hh-hairline)] py-3 text-[16px] font-medium last:border-b-0 hover:text-hh-gold",
+                  current ? "text-hh-gold" : "text-hh-cream",
+                )}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
 
           <Link
-            href="/#contact"
+            href="/contact"
             className="mt-4 inline-flex items-center justify-center rounded-[8px] border border-hh-gold-dark bg-hh-gold px-[28px] py-[14px] text-[16px] font-bold text-hh-green"
           >
             Speak With a Specialist

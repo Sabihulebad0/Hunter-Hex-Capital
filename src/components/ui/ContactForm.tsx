@@ -1,7 +1,8 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { submitContactRequest, type ContactPayload } from "@/lib/forms";
+import { products } from "@/data/products";
 import { cn } from "@/lib/utils";
 
 type Errors = Partial<Record<keyof ContactPayload, string>>;
@@ -43,6 +44,34 @@ export function ContactForm() {
     "idle",
   );
   const [formMessage, setFormMessage] = useState("");
+
+  /**
+   * A product card's "Quote" button arrives here as
+   * `/contact?product=<id>#contact`, so name the product in the message the
+   * specialist receives.
+   *
+   * The id is read from `location` after mount rather than with
+   * `useSearchParams`, which on a prerendered route pushes this form behind a
+   * Suspense fallback and out of the initial HTML. A prefill is a convenience;
+   * it is not worth client-rendering the page's primary conversion element.
+   */
+  useEffect(() => {
+    const productId = new URLSearchParams(window.location.search).get("product");
+    if (!productId) return;
+
+    const product = products.find((item) => item.id === productId);
+    if (!product) return;
+
+    // Never clobber something the visitor has already typed.
+    setValues((prev) =>
+      prev.message
+        ? prev
+        : {
+            ...prev,
+            message: `I would like a quote on the ${product.name}.`,
+          },
+    );
+  }, []);
 
   const update =
     (field: keyof ContactPayload) =>
