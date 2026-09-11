@@ -5,6 +5,7 @@ const ROUTES = [
   "/about",
   "/services",
   "/products",
+  "/portfolio",
   "/gallery",
   "/testimonials",
   "/faq",
@@ -39,7 +40,10 @@ const report = await p.evaluate(() => {
   const missingAlt = imgs.filter(i => i.alt === null || i.alt === undefined).length;
   const emptyAlt = imgs.filter(i => i.alt === "").map(i => i.currentSrc.split("/").pop()?.slice(0,40));
 
+  // `input[type=hidden]` is not a labelable element — it carries a value the
+  // user never sees or focuses, so a missing label is not a defect.
   const unlabeled = [...document.querySelectorAll("input,textarea,select")].filter(el => {
+    if (el.type === "hidden") return false;
     if (el.getAttribute("aria-label") || el.getAttribute("aria-labelledby")) return false;
     return !(el.id && document.querySelector(`label[for="${CSS.escape(el.id)}"]`));
   }).map(el => el.name || el.placeholder || el.type);

@@ -70,7 +70,13 @@ export function Header() {
           />
         </Link>
 
-        <nav aria-label="Main" className="hidden items-center gap-6 lg:flex">
+        {/*
+          The nav switches to the drawer at `xl`, not `lg`. Nine items plus the
+          logo and the CTA do not fit on one 1024px bar — the CTA wrapped to
+          three lines and the nav ran under the logo. Everything from 1280 up
+          keeps the designed single-row header.
+        */}
+        <nav aria-label="Main" className="hidden items-center gap-6 xl:flex">
           {navLinks.map((link) => {
             const current = isCurrent(pathname, link.href);
 
@@ -93,7 +99,7 @@ export function Header() {
         <div className="flex items-center gap-3">
           <Link
             href="/contact"
-            className="hidden rounded-[8px] border border-hh-gold-dark bg-hh-gold px-[28px] py-[14px] text-[16px] font-bold text-hh-green hh-glow transition-colors hover:bg-[#e3c88a] lg:inline-flex"
+            className="hidden rounded-[8px] border border-hh-gold-dark bg-hh-gold px-[28px] py-[14px] text-[16px] font-bold text-hh-green hh-glow transition-colors hover:bg-[#e3c88a] xl:inline-flex"
           >
             Speak With a Specialist
           </Link>
@@ -104,7 +110,7 @@ export function Header() {
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="inline-flex size-11 items-center justify-center rounded-[8px] border border-[var(--hh-hairline)] text-hh-cream lg:hidden"
+            className="inline-flex size-11 items-center justify-center rounded-[8px] border border-[var(--hh-hairline)] text-hh-cream xl:hidden"
           >
             {open ? <X size={22} aria-hidden /> : <Menu size={22} aria-hidden />}
           </button>
@@ -115,7 +121,7 @@ export function Header() {
       <div
         id="mobile-menu"
         hidden={!open}
-        className="border-t border-[var(--hh-hairline)] bg-hh-deep lg:hidden"
+        className="border-t border-[var(--hh-hairline)] bg-hh-deep xl:hidden"
       >
         <nav aria-label="Mobile" className="flex flex-col px-5 py-4 sm:px-8">
           {navLinks.map((link) => {

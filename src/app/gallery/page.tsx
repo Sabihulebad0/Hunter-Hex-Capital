@@ -28,7 +28,7 @@ export default function GalleryPage() {
   return (
     <>
       <PageHero
-        badge="Portfolio & Facilities"
+        badge="Facilities & Documentation"
         title="Transparency Through"
         highlight="Visual Documentation"
         description="Vaults, depositories, transport and the advisory room. We would rather show you where your metal sits than ask you to take it on trust."
