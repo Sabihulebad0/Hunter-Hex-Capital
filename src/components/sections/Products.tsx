@@ -36,7 +36,7 @@ export function Products() {
         </div>
 
         {/* product-grid (45:194) */}
-        <ul className="grid grid-cols-1 items-start gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {featuredProducts.map((product) => (
             <li key={product.id} className="h-full">
               <ProductCard product={product} />

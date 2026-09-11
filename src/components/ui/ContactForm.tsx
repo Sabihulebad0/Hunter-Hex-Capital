@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useState } from "react";
+import Link from "next/link";
 import { submitContactRequest, type ContactPayload } from "@/lib/forms";
 import { products } from "@/data/products";
 import { cn } from "@/lib/utils";
@@ -37,6 +38,7 @@ export function ContactForm() {
     fullName: "",
     email: "",
     phone: "",
+    product: "",
     message: "",
   });
   const [errors, setErrors] = useState<Errors>({});
@@ -47,31 +49,29 @@ export function ContactForm() {
 
   /**
    * A product card's "Quote" button arrives here as
-   * `/contact?product=<id>#contact`, so name the product in the message the
-   * specialist receives.
+   * `/contact?product=<id>#contact` — fill the read-only "Asset of Interest"
+   * field from that id.
    *
    * The id is read from `location` after mount rather than with
    * `useSearchParams`, which on a prerendered route pushes this form behind a
-   * Suspense fallback and out of the initial HTML. A prefill is a convenience;
-   * it is not worth client-rendering the page's primary conversion element.
+   * Suspense fallback and out of the initial HTML. A preselection is a
+   * convenience; it is not worth client-rendering the page's primary
+   * conversion element.
+   *
+   * This is the only way the field is ever set — it is read-only in the UI —
+   * so an unknown id is ignored rather than written through, leaving the field
+   * empty instead of echoing a stale or hand-edited link back to the visitor.
    */
   useEffect(() => {
     const productId = new URLSearchParams(window.location.search).get("product");
     if (!productId) return;
+    if (!products.some((item) => item.id === productId)) return;
 
-    const product = products.find((item) => item.id === productId);
-    if (!product) return;
-
-    // Never clobber something the visitor has already typed.
-    setValues((prev) =>
-      prev.message
-        ? prev
-        : {
-            ...prev,
-            message: `I would like a quote on the ${product.name}.`,
-          },
-    );
+    // Never clobber a choice the visitor has already made.
+    setValues((prev) => (prev.product ? prev : { ...prev, product: productId }));
   }, []);
+
+  const selectedProduct = products.find((item) => item.id === values.product);
 
   const update =
     (field: keyof ContactPayload) =>
@@ -99,7 +99,13 @@ export function ContactForm() {
     if (result.ok) {
       setStatus("sent");
       setFormMessage("Thank you — a specialist will be in touch shortly.");
-      setValues({ fullName: "", email: "", phone: "", message: "" });
+      setValues({
+        fullName: "",
+        email: "",
+        phone: "",
+        product: "",
+        message: "",
+      });
     } else {
       setStatus("error");
       setFormMessage(result.error);
@@ -178,6 +184,48 @@ export function ContactForm() {
             )}
           </div>
         ))}
+
+        <div className="flex flex-col gap-2">
+          <label
+            htmlFor={`${id}-product`}
+            className="text-[14px] font-bold text-hh-cream"
+          >
+            Asset of Interest
+          </label>
+
+          <input
+            id={`${id}-product`}
+            type="text"
+            readOnly
+            value={selectedProduct?.name ?? ""}
+            placeholder="Choose an asset on the Products page"
+            // `readOnly`, not `disabled`: a disabled control is skipped by
+            // keyboard navigation and unreadable to a screen reader, and this
+            // field carries the whole point of the enquiry.
+            className={cn(
+              fieldClass,
+              "cursor-default border-[var(--hh-hairline)] focus:border-[var(--hh-hairline)]",
+              // Gold + bold reads as a stated value rather than an empty box
+              // waiting for input — the same treatment the product card gives
+              // its spread. Without it the field looks editable and invites a
+              // click that does nothing.
+              selectedProduct && "font-bold text-hh-gold",
+            )}
+          />
+
+          {/* The visible field shows the name; the request carries the id. */}
+          <input type="hidden" name="product" value={values.product} />
+
+          {!selectedProduct && (
+            <p className="text-[13px] text-[var(--hh-dim)]">
+              Set automatically when you press{" "}
+              <Link href="/products" className="text-hh-gold hover:underline">
+                Quote
+              </Link>{" "}
+              on a product. Not needed for a general enquiry.
+            </p>
+          )}
+        </div>
 
         <div className="flex flex-col gap-2">
           <label

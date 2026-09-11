@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { PageHero } from "@/components/sections/PageHero";
 import { CtaBand } from "@/components/sections/CtaBand";
-import { products, type MetalCategory } from "@/data/products";
+import { productGroups as groups } from "@/data/products";
 import { TradingViewTickerTape } from "@/components/ui/TradingViewTickerTape";
 import { site } from "@/data/site";
 
@@ -24,24 +24,6 @@ export const metadata: Metadata = {
  * approved H1-R1 vocabulary — the same section badge, heading scale, spot bar
  * and product card. Nothing new is introduced. Awaiting a Figma frame.
  */
-
-/** Catalog order, so the grid always leads with gold. */
-const categoryOrder: MetalCategory[] = ["gold", "silver", "platinum", "palladium"];
-
-const categoryLabels: Record<MetalCategory, string> = {
-  gold: "Gold",
-  silver: "Silver",
-  platinum: "Platinum",
-  palladium: "Palladium",
-};
-
-const groups = categoryOrder
-  .map((category) => ({
-    category,
-    label: categoryLabels[category],
-    items: products.filter((product) => product.category === category),
-  }))
-  .filter((group) => group.items.length > 0);
 
 export default function ProductsPage() {
   return (

@@ -94,3 +94,30 @@ export const products: Product[] = [
 
 /** The home page shows the full eight-card grid from Figma. */
 export const featuredProducts = products;
+
+/** Catalog order, so every grouped view leads with gold. */
+export const categoryOrder: MetalCategory[] = [
+  "gold",
+  "silver",
+  "platinum",
+  "palladium",
+];
+
+export const categoryLabels: Record<MetalCategory, string> = {
+  gold: "Gold",
+  silver: "Silver",
+  platinum: "Platinum",
+  palladium: "Palladium",
+};
+
+/**
+ * The catalog grouped by metal, in `categoryOrder`. Shared by the /products
+ * grid and the contact form's asset picker so the two never drift.
+ */
+export const productGroups = categoryOrder
+  .map((category) => ({
+    category,
+    label: categoryLabels[category],
+    items: products.filter((product) => product.category === category),
+  }))
+  .filter((group) => group.items.length > 0);

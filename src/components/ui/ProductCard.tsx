@@ -8,7 +8,10 @@ import type { Product } from "@/data/products";
  */
 export function ProductCard({ product }: { product: Product }) {
   return (
-    <article className="flex flex-col gap-4 rounded-[16px] border border-[var(--hh-hairline)] bg-hh-deep p-4">
+    // `h-full` makes the card fill the grid row's height. Without it a card
+    // whose name fits on one line renders shorter than a two-line neighbour
+    // and its Quote button floats above the row's baseline.
+    <article className="flex h-full flex-col gap-4 rounded-[16px] border border-[var(--hh-hairline)] bg-hh-deep p-4">
       <div className="relative aspect-[248/220] w-full overflow-hidden rounded-[8px]">
         <Image
           src={product.image}
