@@ -5,8 +5,9 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { services } from "@/data/services";
 
 /**
- * Figma node 45:122 — five 360x280 cards wrapping three-up inside the 1280
- * column, so the last row holds two.
+ * Figma node 45:122 — the service cards at the designed 280px minimum height.
+ * The client withdrew the fifth card, so the remaining four run two-up and then
+ * four-up inside the 1280 column, with no orphan row.
  */
 export function Services() {
   return (
@@ -17,7 +18,7 @@ export function Services() {
           title="Institutional-Grade Solutions For Wealth Storage"
         />
 
-        <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
           {services.map(({ id, title, description, icon: Icon }) => (
             <li
               key={id}

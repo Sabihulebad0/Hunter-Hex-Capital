@@ -11,7 +11,7 @@ import { faqItems } from "@/data/faq";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Precious metals sales, Gold and Silver IRA accounts, trust and estate delivery, secure depositories and non-IRA storage plans from Hunter Hex Capital.",
+    "Precious metals sales, Gold and Silver IRA accounts, secure depositories and non-IRA storage plans from Hunter Hex Capital.",
   alternates: { canonical: "/services" },
 };
 
@@ -66,13 +66,13 @@ export default function ServicesPage() {
         badge="Our Deployable Services"
         title="Institutional-Grade Solutions For"
         highlight="Wealth Storage"
-        description="Five service lines covering acquisition, tax-advantaged retirement accounts, fiduciary delivery and long-term custody — each run by the same desk, so nothing is handed off to a third party you never speak to."
+        description="Four service lines covering acquisition, tax-advantaged retirement accounts and long-term custody — each run by the same desk, so nothing is handed off to a third party you never speak to."
         trail={[{ label: "Home", href: "/" }, { label: "Services" }]}
       />
 
       <section className="bg-hh-green py-16 lg:py-[100px]">
         <Container className="flex flex-col gap-12 lg:gap-16">
-          <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
             {services.map(({ id, title, description, icon: Icon }) => (
               <li
                 key={id}
@@ -171,7 +171,7 @@ export default function ServicesPage() {
 
       <CtaBand
         title="Which Service Fits Your Position?"
-        description="Tell us what you are protecting and over what horizon. We will tell you which of the five lines applies — including when the answer is none of them."
+        description="Tell us what you are protecting and over what horizon. We will tell you which of the four lines applies — including when the answer is none of them."
         secondary={{ label: "View Bullion Products", href: "/products" }}
       />
     </>

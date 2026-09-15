@@ -6,7 +6,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { PageHero } from "@/components/sections/PageHero";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { frameworks, mandates, reviewSteps } from "@/data/portfolio";
-import { categoryLabels } from "@/data/products";
+import { metalLabels } from "@/data/products";
 import { site } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -103,7 +103,7 @@ export default function PortfolioPage() {
                     <div
                       role="img"
                       aria-label={`Mix: ${mix
-                        .map((slice) => `${slice.share}% ${categoryLabels[slice.metal]}`)
+                        .map((slice) => `${slice.share}% ${metalLabels[slice.metal]}`)
                         .join(", ")}`}
                       className="flex h-3 w-full overflow-hidden rounded-[100px] bg-hh-green"
                     >
@@ -132,7 +132,7 @@ export default function PortfolioPage() {
                           <span className="font-bold text-hh-cream">
                             {slice.share}%
                           </span>
-                          {categoryLabels[slice.metal]}
+                          {metalLabels[slice.metal]}
                         </li>
                       ))}
                     </ul>

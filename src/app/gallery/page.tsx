@@ -9,7 +9,7 @@ import { galleryItems } from "@/data/gallery";
 export const metadata: Metadata = {
   title: "Gallery",
   description:
-    "Visual documentation of Hunter Hex Capital's reserves, depository facilities, armed logistics and advisory rooms.",
+    "Visual documentation of Hunter Hex Capital's reserves, depository facilities, armed logistics and consulting rooms.",
   alternates: { canonical: "/gallery" },
 };
 
@@ -31,7 +31,7 @@ export default function GalleryPage() {
         badge="Facilities & Documentation"
         title="Transparency Through"
         highlight="Visual Documentation"
-        description="Vaults, depositories, transport and the advisory room. We would rather show you where your metal sits than ask you to take it on trust."
+        description="Vaults, depositories, transport and the consulting room. We would rather show you where your metal sits than ask you to take it on trust."
         trail={[{ label: "Home", href: "/" }, { label: "Gallery" }]}
       />
 

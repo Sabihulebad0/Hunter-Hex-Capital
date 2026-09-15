@@ -1,11 +1,11 @@
 import { Coins, Landmark, ShieldCheck, Users, type LucideIcon } from "lucide-react";
-import type { MetalCategory } from "@/data/products";
+import type { Metal } from "@/data/products";
 
 /**
  * Content for `/portfolio`.
  *
  * IMPORTANT — read before editing. `site.disclaimer` states that Hunter Hex
- * Capital representatives are not licensed financial advisors and do not give
+ * Capital representatives are not licensed to give financial guidance and do not give
  * investment advice. Everything in this file is therefore written as
  * *structure*, never as a recommendation or an outcome:
  *
@@ -19,7 +19,7 @@ import type { MetalCategory } from "@/data/products";
  */
 
 export type AllocationSlice = {
-  metal: MetalCategory;
+  metal: Metal;
   /** Share of the metals sleeve, in percent. Each framework sums to 100. */
   share: number;
 };
@@ -93,10 +93,10 @@ export const frameworks: Framework[] = [
     name: "Generational Transfer",
     icon: Users,
     objective:
-      "Structure a holding so it can pass to a trust or an estate intact — recognisable coinage, clean documentation, and custody a trustee can verify.",
+      "Structure a holding so it can pass to a trust or an estate intact — recognisable coinage, clean documentation, and custody an independent party can verify.",
     horizon: "Multi-generational",
-    vehicle: "Trust & estate delivery",
-    custody: "Segregated, trustee-verified",
+    vehicle: "Cash purchase or insured delivery",
+    custody: "Segregated, independently verified",
     mix: [
       { metal: "gold", share: 70 },
       { metal: "platinum", share: 20 },
@@ -136,11 +136,11 @@ export const mandates: Mandate[] = [
     id: "family-trust",
     profile: "Family trust, second generation",
     situation:
-      "Trustees needed a physical allocation that could be inventoried and verified by a party independent of the family.",
+      "The family needed a physical allocation that could be inventoried and verified by a party independent of the family.",
     structure:
-      "Trust and estate delivery, recognisable sovereign coinage only, with assay documentation retained for each line.",
+      "Segregated depository storage of recognisable sovereign coinage only, with assay documentation retained for each line.",
     outcome:
-      "Holding is verifiable at the depository by any trustee, and passes without needing to be liquidated.",
+      "Holding is verifiable at the depository by an independent party, and passes without needing to be liquidated.",
   },
   {
     id: "owner-liquidity",

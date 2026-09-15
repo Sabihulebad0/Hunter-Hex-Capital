@@ -3,7 +3,7 @@
 import { useEffect, useId, useState } from "react";
 import Link from "next/link";
 import { submitContactRequest, type ContactPayload } from "@/lib/forms";
-import { products } from "@/data/products";
+import { findProductBySlug } from "@/data/products";
 import { cn } from "@/lib/utils";
 
 type Errors = Partial<Record<keyof ContactPayload, string>>;
@@ -49,29 +49,35 @@ export function ContactForm() {
 
   /**
    * A product card's "Quote" button arrives here as
-   * `/contact?product=<id>#contact` — fill the read-only "Asset of Interest"
-   * field from that id.
+   * `/contact?product=<slug>#contact` — fill the read-only "Asset of Interest"
+   * field from that slug. Legacy slugs (renamed products) resolve too, so a
+   * link issued before a rename still lands on the right asset.
    *
-   * The id is read from `location` after mount rather than with
+   * The slug is read from `location` after mount rather than with
    * `useSearchParams`, which on a prerendered route pushes this form behind a
    * Suspense fallback and out of the initial HTML. A preselection is a
    * convenience; it is not worth client-rendering the page's primary
    * conversion element.
    *
    * This is the only way the field is ever set — it is read-only in the UI —
-   * so an unknown id is ignored rather than written through, leaving the field
-   * empty instead of echoing a stale or hand-edited link back to the visitor.
+   * so an unknown slug is ignored rather than written through, leaving the
+   * field empty instead of echoing a stale or hand-edited link back to the
+   * visitor.
    */
   useEffect(() => {
-    const productId = new URLSearchParams(window.location.search).get("product");
-    if (!productId) return;
-    if (!products.some((item) => item.id === productId)) return;
+    const requested = new URLSearchParams(window.location.search).get("product");
+    if (!requested) return;
+    const product = findProductBySlug(requested);
+    if (!product) return;
 
-    // Never clobber a choice the visitor has already made.
-    setValues((prev) => (prev.product ? prev : { ...prev, product: productId }));
+    // Never clobber a choice the visitor has already made. The request carries
+    // the current slug even when the link used a legacy one.
+    setValues((prev) =>
+      prev.product ? prev : { ...prev, product: product.slug },
+    );
   }, []);
 
-  const selectedProduct = products.find((item) => item.id === values.product);
+  const selectedProduct = findProductBySlug(values.product);
 
   const update =
     (field: keyof ContactPayload) =>
@@ -213,7 +219,7 @@ export function ContactForm() {
             )}
           />
 
-          {/* The visible field shows the name; the request carries the id. */}
+          {/* The visible field shows the name; the request carries the slug. */}
           <input type="hidden" name="product" value={values.product} />
 
           {!selectedProduct && (

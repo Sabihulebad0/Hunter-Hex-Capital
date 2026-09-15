@@ -51,8 +51,8 @@ export const faqItems: FaqItem[] = [
   {
     id: "physical-delivery",
     question: "Can I take physical delivery?",
-    // TODO(client): awaiting approved copy — derived from the Trust & Estate Delivery service card.
+    // Client-approved copy (change request round 2).
     answer:
-      "Yes. We coordinate direct delivery alongside eligible storage, including logistics designed specifically for private trustees and family offices.",
+      "Yes. We coordinate insured direct delivery to your door, alongside eligible storage options.",
   },
 ];

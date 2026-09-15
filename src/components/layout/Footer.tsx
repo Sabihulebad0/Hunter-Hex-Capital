@@ -99,7 +99,7 @@ export function Footer() {
               Subscribe to Market Spreads
             </h2>
             <p className="text-[14px] text-hh-muted">
-              Get physical premium reports and market advisory notes directly to
+              Get physical premium reports and market insight notes directly to
               your inbox.
             </p>
 

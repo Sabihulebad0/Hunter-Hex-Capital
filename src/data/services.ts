@@ -2,7 +2,6 @@ import {
   Activity,
   Briefcase,
   Database,
-  Shield,
   TrendingUp,
   type LucideIcon,
 } from "lucide-react";
@@ -15,7 +14,10 @@ export type Service = {
   icon: LucideIcon;
 };
 
-/** Five cards from Figma node 45:127, in design order. */
+/**
+ * Four cards from Figma node 45:127, in design order. The design's fifth card
+ * was withdrawn by the client (change request round 2).
+ */
 export const services: Service[] = [
   {
     id: "precious-metals-sales",
@@ -30,13 +32,6 @@ export const services: Service[] = [
     description:
       "Seamless rollover from your traditional 401(k) to secure physical metals.",
     icon: TrendingUp,
-  },
-  {
-    id: "trust-estate-delivery",
-    title: "Trust & Estate Delivery",
-    description:
-      "Logistics solutions designed specifically for Private Trustees and Family Offices.",
-    icon: Shield,
   },
   {
     id: "secure-depositories",

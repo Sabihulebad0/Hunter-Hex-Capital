@@ -4,15 +4,19 @@ import { ButtonLink } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { featuredProducts } from "@/data/products";
+import { getProductImageAvailability } from "@/lib/product-images";
 import { TradingViewTickerTape } from "@/components/ui/TradingViewTickerTape";
 
 /**
  * Figma node 45:183.
  *
  * The client's brief moved this section to third in the page order and grew it
- * from four products to eight with a "View More Products" route out.
+ * from four products to eight with a "View More Products" route out. Only the
+ * `featured` products render here; the full catalog lives on /products.
  */
 export function Products() {
+  const imageAvailability = getProductImageAvailability(featuredProducts);
+
   return (
     <section id="products" className="scroll-mt-[88px] bg-hh-green py-16 lg:py-[100px]">
       <Container className="flex flex-col gap-12">
@@ -38,8 +42,11 @@ export function Products() {
         {/* product-grid (45:194) */}
         <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {featuredProducts.map((product) => (
-            <li key={product.id} className="h-full">
-              <ProductCard product={product} />
+            <li key={product.slug} className="h-full">
+              <ProductCard
+                product={product}
+                imageAvailable={imageAvailability[product.slug]}
+              />
             </li>
           ))}
         </ul>

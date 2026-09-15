@@ -20,10 +20,10 @@ export const galleryItems: GalleryItem[] = [
     alt: "Reinforced depository vault door",
   },
   {
-    id: "private-wealth-advisory",
-    label: "Private Wealth Advisory",
-    image: "/images/gallery/private-wealth-advisory.webp",
-    alt: "Advisors meeting with a client in a boardroom",
+    id: "private-wealth-consulting",
+    label: "Private Wealth Consulting",
+    image: "/images/gallery/private-wealth-consulting.webp",
+    alt: "Consultants meeting with a client in a boardroom",
   },
   {
     id: "silver-eagle-bullion",

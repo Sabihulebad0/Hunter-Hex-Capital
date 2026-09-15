@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 const stats = [
   { value: "$4B+", label: "Physical Metals Safely Delivered" },
   { value: "12,000+", label: "Private & Institutional Clients" },
-  { value: "15+ Years", label: "Providing Strategic Advisory" },
+  { value: "15+ Years", label: "Providing Strategic Consulting" },
 ];
 
 /** Client types, drawn from the three approved testimonials themselves. */

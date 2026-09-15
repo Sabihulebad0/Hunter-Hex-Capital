@@ -13,9 +13,9 @@ export type ContactPayload = {
   email: string;
   phone: string;
   /**
-   * `Product["id"]` of the asset the visitor wants quoted, or "" when they
+   * `Product["slug"]` of the asset the visitor wants quoted, or "" when they
    * picked the general-enquiry option. A product card's "Quote" button
-   * preselects this via `/contact?product=<id>`.
+   * preselects this via `/contact?product=<slug>`.
    */
   product: string;
   message: string;

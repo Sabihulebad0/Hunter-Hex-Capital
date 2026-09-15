@@ -10,7 +10,7 @@ import { site } from "@/data/site";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Hunter Hex Capital is a boutique physical metals brokerage and custody coordinator serving private collectors, trustees and family offices from downtown Miami.",
+    "Hunter Hex Capital is a boutique physical metals brokerage and custody coordinator serving private collectors, wealth managers and family offices from downtown Miami.",
   alternates: { canonical: "/about" },
 };
 
@@ -46,9 +46,9 @@ const principles = [
   },
   {
     icon: TrendingUp,
-    title: "Advisory, Not Sales Pressure",
+    title: "Consulting, Not Sales Pressure",
     description:
-      "Fifteen years of strategic advisory behind every allocation conversation, whether you are placing your first ounce or restructuring a trust.",
+      "Fifteen years of strategic consulting behind every allocation conversation, whether you are placing your first ounce or restructuring a trust.",
   },
 ];
 
@@ -66,7 +66,7 @@ export default function AboutPage() {
         badge="Who We Are"
         title="A Boutique Metals Desk Built Around"
         highlight="Wealth Continuity"
-        description="Hunter Hex Capital LLC offers boutique physical metals brokerage and custody coordination. Our focus is ensuring wealth continuity for prospective generations — for individual collectors, private trustees and family offices alike."
+        description="Hunter Hex Capital LLC offers boutique physical metals brokerage and custody coordination. Our focus is ensuring wealth continuity for prospective generations — for individual collectors, wealth managers and family offices alike."
         trail={[{ label: "Home", href: "/" }, { label: "About" }]}
       />
 
