@@ -16,7 +16,7 @@ export function Hero() {
   return (
     <section className="bg-hh-green py-14 lg:py-[80px]">
       <Container className="flex flex-col gap-12 lg:gap-16">
-        <div className="flex flex-col items-center gap-10 lg:flex-row lg:items-center lg:gap-12">
+        <div className="flex flex-col items-start gap-10 lg:flex-row lg:items-start lg:gap-12">
           {/* hero-left (45:21) */}
           <div className="flex w-full min-w-0 flex-col items-start gap-8 lg:flex-1">
             <SectionBadge>Premier Wealth Protection</SectionBadge>

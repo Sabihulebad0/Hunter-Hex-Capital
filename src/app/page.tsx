@@ -1,4 +1,5 @@
 import { Hero } from "@/components/sections/Hero";
+import { GoldProducts } from "@/components/sections/GoldProducts";
 import { Products } from "@/components/sections/Products";
 import { About } from "@/components/sections/About";
 import { Services } from "@/components/sections/Services";
@@ -12,12 +13,14 @@ import { Contact } from "@/components/sections/Contact";
  *
  * Section order is exactly the artboard's: header, hero, products, about,
  * services, gallery, testimonials, faq, contact, footer. Products sits third
- * per the client's direction note on the canvas (node 45:461).
+ * per the client's direction note on the canvas (node 45:461). The dedicated
+ * gold section was added after the hero at the client's request.
  */
 export default function HomePage() {
   return (
     <>
       <Hero />
+      <GoldProducts />
       <Products />
       <About />
       <Services />
