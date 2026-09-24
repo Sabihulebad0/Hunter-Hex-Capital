@@ -376,6 +376,9 @@ const openByDefault: Record<FilterGroupKey, boolean> = {
   denom: false,
 };
 
+/** Groups kept in the filter logic but not shown in the panel. */
+const hiddenGroups: FilterGroupKey[] = ["denom"];
+
 function FilterPanel({
   facets,
   filters,
@@ -400,19 +403,21 @@ function FilterPanel({
         <span className="text-[12px] font-medium text-hh-muted">({iraCount})</span>
       </label>
 
-      {facets.map((facet) => (
-        <FacetSection
-          key={facet.key}
-          facet={facet}
-          defaultOpen={openByDefault[facet.key] || filters[facet.key].length > 0}
-          onToggle={onToggle}
-          extra={
-            facet.key === "weight" ? (
-              <UnitToggle id={`${id}-unit`} unit={unit} onUnit={onUnit} />
-            ) : undefined
-          }
-        />
-      ))}
+      {facets
+        .filter((facet) => !hiddenGroups.includes(facet.key))
+        .map((facet) => (
+          <FacetSection
+            key={facet.key}
+            facet={facet}
+            defaultOpen={openByDefault[facet.key] || filters[facet.key].length > 0}
+            onToggle={onToggle}
+            extra={
+              facet.key === "weight" ? (
+                <UnitToggle id={`${id}-unit`} unit={unit} onUnit={onUnit} />
+              ) : undefined
+            }
+          />
+        ))}
     </div>
   );
 }
