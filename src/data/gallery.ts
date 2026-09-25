@@ -21,7 +21,7 @@ export const galleryItems: GalleryItem[] = [
   },
   {
     id: "private-wealth-consulting",
-    label: "Private Wealth Management",
+    label: "Private Wealth Client",
     image: "/images/gallery/private-wealth-consulting.webp",
     alt: "Consultants meeting with a client in a boardroom",
   },

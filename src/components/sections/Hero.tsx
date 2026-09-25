@@ -18,7 +18,7 @@ export function Hero() {
       <Container className="flex flex-col gap-12 lg:gap-16">
         <div className="flex flex-col items-start gap-10 lg:flex-row lg:items-start lg:gap-12">
           {/* hero-left (45:21) */}
-          <div className="flex w-full min-w-0 flex-col items-start gap-8 lg:flex-1">
+          <div className="flex w-full min-w-0 flex-col items-start gap-8 lg:flex-1 lg:pt-[90px]">
             <SectionBadge>Premier Wealth Protection</SectionBadge>
 
             <h1 className="text-[34px] font-bold leading-[1.1] text-hh-cream sm:text-[44px] lg:text-[56px]">
