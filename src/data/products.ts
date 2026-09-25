@@ -896,20 +896,7 @@ export function groupByMetal(items: Product[]) {
     .filter((group) => group.items.length > 0);
 }
 
-/** "Gold Spot + 2.4% Spread", or the on-request wording when no spread is set. */
-export function formatSpread(product: Product): string {
-  if (product.spreadPct === null) return "Premium on request";
-  return `${metalLabels[product.metal]} Spot + ${product.spreadPct.toFixed(1)}% Spread`;
-}
-
-/** "1 oz · .9999 fine · $50" — the second line of every product card. */
+/** "1 oz · .9999 fine" — the second line of every product card. */
 export function formatSpecLine(product: Product): string {
-  const face =
-    product.denominations.length > 0
-      ? product.denominations.map((d) => d.label).join(", ")
-      : product.type === "proof"
-        ? "Set contents to be confirmed"
-        : "No face value";
-
-  return `${product.weightLabel} · ${product.purity} fine · ${face}`;
+  return `${product.weightLabel} · ${product.purity} fine`;
 }

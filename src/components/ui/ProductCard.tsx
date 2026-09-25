@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   formatSpecLine,
-  formatSpread,
   iraLabels,
   type Product,
 } from "@/data/products";
@@ -10,7 +9,7 @@ import { ProductImagePlaceholder } from "@/components/ui/ProductImagePlaceholder
 import { cn } from "@/lib/utils";
 
 /**
- * Figma node 45:195 — 280px card, 248x220 image well, name + spec + spread,
+ * Figma node 45:195 — 280px card, 248x220 image well, name + spec,
  * then the IRA note beside a gold Quote button.
  *
  * `imageAvailable` comes from the server (`src/lib/product-images.ts`): the
@@ -51,7 +50,6 @@ export function ProductCard({
         <p className="text-[13px] leading-[1.5] text-[var(--hh-dim)]">
           {formatSpecLine(product)}
         </p>
-        <p className="text-[14px] font-bold text-hh-gold">{formatSpread(product)}</p>
       </div>
 
       <div className="mt-auto flex items-center justify-between gap-3">
